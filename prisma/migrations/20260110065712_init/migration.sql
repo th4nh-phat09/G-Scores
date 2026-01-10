@@ -78,3 +78,10 @@ ALTER TABLE "Score" ADD CONSTRAINT "Score_subjectId_fkey" FOREIGN KEY ("subjectI
 
 -- AddForeignKey
 ALTER TABLE "Score" ADD CONSTRAINT "Score_languageCodeId_fkey" FOREIGN KEY ("languageCodeId") REFERENCES "LanguageCode"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddConstraint
+ALTER TABLE "Score"
+ADD CONSTRAINT score_value_range
+CHECK (
+  value IS NULL OR (value >= 0 AND value <= 10)
+);
