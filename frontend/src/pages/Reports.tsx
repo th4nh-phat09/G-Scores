@@ -153,58 +153,62 @@ const Reports = () => {
                 <p className="text-sm font-medium text-gray-700 mb-4">
                   Biểu đồ phân bố điểm (Cột)
                 </p>
-                <ReactECharts
-                  option={{
-                    tooltip: {
-                      trigger: "axis",
-                      axisPointer: {
-                        type: "shadow",
-                      },
-                    },
-                    grid: {
-                      left: "3%",
-                      right: "15%",
-                      bottom: "3%",
-                      containLabel: true,
-                    },
-                    xAxis: {
-                      type: "value",
-                      name: "Số thí sinh",
-                    },
-                    yAxis: {
-                      type: "category",
-                      data: statsData.data.levels.map((l) => l.description),
-                    },
-                    series: [
-                      {
-                        name: "Số thí sinh",
-                        type: "bar",
-                        data: statsData.data.levels.map((l) => ({
-                          value: l.count,
-                          percentage: l.percentage,
-                          itemStyle: {
-                            color:
-                              l.level === "EXCELLENT"
-                                ? "#22c55e"
-                                : l.level === "GOOD"
-                                ? "#3b82f6"
-                                : l.level === "AVERAGE"
-                                ? "#eab308"
-                                : "#ef4444",
+                <div className="overflow-x-auto">
+                  <div style={{ minWidth: "500px" }}>
+                    <ReactECharts
+                      option={{
+                        tooltip: {
+                          trigger: "axis",
+                          axisPointer: {
+                            type: "shadow",
                           },
-                        })),
-                        label: {
-                          show: true,
-                          position: "right",
-                          formatter: (params: any) =>
-                            `${params.data.percentage}%`,
                         },
-                      },
-                    ],
-                  }}
-                  style={{ height: "350px" }}
-                  opts={{ renderer: "svg" }}
-                />
+                        grid: {
+                          left: "3%",
+                          right: "15%",
+                          bottom: "3%",
+                          containLabel: true,
+                        },
+                        xAxis: {
+                          type: "value",
+                          name: "Số thí sinh",
+                        },
+                        yAxis: {
+                          type: "category",
+                          data: statsData.data.levels.map((l) => l.description),
+                        },
+                        series: [
+                          {
+                            name: "Số thí sinh",
+                            type: "bar",
+                            data: statsData.data.levels.map((l) => ({
+                              value: l.count,
+                              percentage: l.percentage,
+                              itemStyle: {
+                                color:
+                                  l.level === "EXCELLENT"
+                                    ? "#22c55e"
+                                    : l.level === "GOOD"
+                                    ? "#3b82f6"
+                                    : l.level === "AVERAGE"
+                                    ? "#eab308"
+                                    : "#ef4444",
+                              },
+                            })),
+                            label: {
+                              show: true,
+                              position: "right",
+                              formatter: (params: any) =>
+                                `${params.data.percentage}%`,
+                            },
+                          },
+                        ],
+                      }}
+                      style={{ height: "350px", width: "100%" }}
+                      opts={{ renderer: "svg" }}
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Pie Chart */}

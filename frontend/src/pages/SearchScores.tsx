@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { Search, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { useLazyGetStudentScoreQuery } from '../services/studentApi';
+import { useState } from "react";
+import { Search, AlertCircle, CheckCircle2 } from "lucide-react";
+import { useLazyGetStudentScoreQuery } from "../services/studentApi";
 
 const SearchScores = () => {
-  const [registrationNumber, setRegistrationNumber] = useState('');
+  const [registrationNumber, setRegistrationNumber] = useState("");
   const [trigger, { data, isLoading, error, isSuccess }] =
     useLazyGetStudentScoreQuery();
 
@@ -34,30 +34,28 @@ const SearchScores = () => {
             >
               Registration Number:
             </label>
-            <div className="flex gap-3">
-              <input
-                type="text"
-                id="registrationNumber"
-                value={registrationNumber}
-                onChange={(e) => setRegistrationNumber(e.target.value)}
-                placeholder="Enter registration number"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                maxLength={8}
-                disabled={isLoading}
-              />
-              <button
-                type="submit"
-                disabled={isLoading || !registrationNumber.trim()}
-                className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition flex items-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Search className="w-4 h-4" />
-                {isLoading ? 'Searching...' : 'Submit'}
-              </button>
-            </div>
+            <input
+              type="text"
+              id="registrationNumber"
+              value={registrationNumber}
+              onChange={(e) => setRegistrationNumber(e.target.value)}
+              placeholder="Enter registration number"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              maxLength={8}
+              disabled={isLoading}
+            />
             <p className="mt-2 text-sm text-gray-500">
               Nhập số báo danh (7 hoặc 8 chữ số)
             </p>
           </div>
+          <button
+            type="submit"
+            disabled={isLoading || !registrationNumber.trim()}
+            className="px-8 py-2.5 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg hover:from-blue-700 hover:to-blue-900 transition flex items-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+          >
+            <Search className="w-4 h-4" />
+            {isLoading ? "Searching..." : "Submit"}
+          </button>
         </form>
       </div>
 
@@ -68,9 +66,10 @@ const SearchScores = () => {
           <div>
             <p className="font-medium text-red-800">Lỗi tra cứu</p>
             <p className="text-sm text-red-600 mt-1">
-              {'data' in error
-                ? (error.data as any)?.message || 'Không tìm thấy học sinh với số báo danh này'
-                : 'Có lỗi xảy ra khi tra cứu điểm'}
+              {"data" in error
+                ? (error.data as any)?.message ||
+                  "Không tìm thấy học sinh với số báo danh này"
+                : "Có lỗi xảy ra khi tra cứu điểm"}
             </p>
           </div>
         </div>
@@ -103,7 +102,7 @@ const SearchScores = () => {
 
             {/* Student Info */}
             <div className="border-b pb-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-gray-600">Số báo danh</p>
                   <p className="text-lg font-semibold text-gray-900">
@@ -113,7 +112,7 @@ const SearchScores = () => {
                 <div>
                   <p className="text-sm text-gray-600">Mã ngoại ngữ</p>
                   <p className="text-lg font-semibold text-gray-900">
-                    {data.data.languageCode || '-'}
+                    {data.data.languageCode || "-"}
                   </p>
                 </div>
               </div>
@@ -139,7 +138,7 @@ const SearchScores = () => {
                   {data.data.scores.map((score, index) => (
                     <tr
                       key={score.subjectCode}
-                      className={index % 2 === 0 ? 'bg-gray-50' : ''}
+                      className={index % 2 === 0 ? "bg-gray-50" : ""}
                     >
                       <td className="py-3 px-4">{score.subjectName}</td>
                       <td className="py-3 px-4 text-gray-600">
@@ -149,12 +148,12 @@ const SearchScores = () => {
                         <span
                           className={`font-semibold ${
                             score.value >= 8
-                              ? 'text-green-600'
+                              ? "text-green-600"
                               : score.value >= 6
-                              ? 'text-blue-600'
+                              ? "text-blue-600"
                               : score.value >= 4
-                              ? 'text-yellow-600'
-                              : 'text-red-600'
+                              ? "text-yellow-600"
+                              : "text-red-600"
                           }`}
                         >
                           {score.value}

@@ -207,7 +207,6 @@ export class ReportService {
   }
 
   //Lấy thống kê tổng quan cho dashboard
-  //Sử dụng count() với index để tối ưu performance
   async getDashboardStats(): Promise<DashboardStatsDto> {
     const [totalStudents, totalSubjects] = await Promise.all([
       // Đếm tổng số học sinh
