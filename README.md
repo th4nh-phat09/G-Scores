@@ -1,98 +1,211 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🎓 G-Scores - Hệ thống tra cứu điểm thi THPT 2024
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+**Golden Owl Solutions - Intern Assignment**
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Ứng dụng web tra cứu và phân tích điểm thi THPT Quốc gia 2024.
 
-## Description
+## 📖 Tổng quan
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+G-Scores là hệ thống full-stack cho phép:
 
-## Project setup
+- 🔍 **Tra cứu điểm thi** theo số báo danh
+- 📊 **Phân tích thống kê** phân bố điểm theo môn học
+- 🏆 **Xếp hạng** Top 10 học sinh khối A (Toán, Lý, Hóa)
+- 📈 **Trực quan hóa dữ liệu** với biểu đồ ECharts
 
-```bash
-$ npm install
+## 🏗 Cấu trúc Project
+
+```
+G-Scores/
+├── backend/          # NestJS API + PostgreSQL + Prisma
+│   ├── src/          # Source code
+│   ├── prisma/       # Database schema & migrations
+│   └── README.md     # Backend setup guide
+│
+├── frontend/         # React + Vite + Tailwind CSS + RTK Query
+│   ├── src/          # Source code
+│   └── README.md     # Frontend setup guide
+│
+└── README.md         # This file
 ```
 
-## Compile and run the project
+## 🛠 Tech Stack
+
+### Backend
+
+- **Framework**: NestJS (Node.js + TypeScript)
+- **Database**: PostgreSQL 14+
+- **ORM**: Prisma
+- **Documentation**: Swagger/OpenAPI
+- **Port**: 8000
+
+### Frontend
+
+- **Framework**: React 18 + Vite 7.3
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **State Management**: Redux Toolkit Query
+- **Charts**: ECharts
+- **Port**: 5173
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js >= 18.x
+- PostgreSQL >= 14.x
+- npm hoặc yarn
+
+### 1. Clone Repository
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone <repository-url>
+cd G-Scores
 ```
 
-## Run tests
+### 2. Setup Backend
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cd backend
+npm install
+cp .env.example .env
+# Cập nhật DATABASE_URL trong .env
+npx prisma generate
+npx prisma migrate deploy
+npm run seed
+npm run start:dev
 ```
 
-## Deployment
+**Backend sẽ chạy tại**: http://localhost:8000
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+📖 **Chi tiết**: Xem [backend/README.md](backend/README.md)
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 3. Setup Frontend
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+cd frontend
+npm install
+cp .env.example .env
+# Đảm bảo VITE_API_URL=http://localhost:8000
+npm run dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+**Frontend sẽ chạy tại**: http://localhost:5173
 
-## Resources
+📖 **Chi tiết**: Xem [frontend/README.md](frontend/README.md)
 
-Check out a few resources that may come in handy when working with NestJS:
+## 📊 Tính năng
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### 1. Dashboard
 
-## Support
+- Tổng quan số lượng thí sinh và môn thi
+- Thống kê tổng quan hệ thống
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### 2. Search Scores (Tra cứu điểm)
 
-## Stay in touch
+- Tìm kiếm theo số báo danh (8 chữ số)
+- Hiển thị điểm tất cả môn thi
+- Hiển thị mã ngoại ngữ
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 3. Reports (Báo cáo thống kê)
 
-## License
+- Chọn môn học từ dropdown
+- **Biểu đồ cột**: Phân bố điểm 4 mức (Giỏi, Khá, TB, Yếu)
+- **Biểu đồ tròn**: Tỷ lệ % theo từng mức điểm
+- Hiển thị số lượng và phần trăm chi tiết
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### 4. Leaderboard (Bảng xếp hạng)
+
+- Top 10 học sinh khối A (tổng Toán + Lý + Hóa)
+- Icons đặc biệt cho top 3 (🏆🥈🥉)
+- Hiển thị điểm từng môn và tổng điểm
+
+### 5. Responsive Design
+
+- Desktop: Sidebar navigation
+- Mobile: Hamburger menu với slide-in animation
+- Breakpoints: sm, md, lg
+
+## 📚 API Endpoints
+
+| Method | Endpoint                                    | Description           |
+| ------ | ------------------------------------------- | --------------------- |
+| GET    | `/api/students/:registrationNumber/score`   | Tra cứu điểm theo SBD |
+| GET    | `/api/reports/score-levels?subjectCode=xxx` | Thống kê 4 mức điểm   |
+| GET    | `/api/reports/top-10-group-a`               | Top 10 khối A         |
+| GET    | `/api/reports/dashboard-stats`              | Thống kê tổng quan    |
+| GET    | `/api/subjects`                             | Danh sách môn thi     |
+
+**Swagger Documentation**: http://localhost:8000/api
+
+## 🗄️ Database Schema
+
+### Entities
+
+- **Student**: Thí sinh (345,615 records)
+- **Subject**: Môn học (9 subjects)
+- **Score**: Điểm thi (2,765,280 records)
+- **LanguageCode**: Mã ngoại ngữ (3 codes)
+
+### Indexes
+
+- `@@index([studentId])` - Fast student lookup
+- `@@index([subjectId, value])` - Score statistics
+- `@@index([subjectId, studentId, value])` - Top rankings
+
+## 🎨 Design System
+
+**Theme**: Professional Blue Gradient
+
+- Primary: `#2563eb` → `#1d4ed8` → `#1e40af`
+- Background: `#f8fafc` → `#eff6ff`
+- Typography: Inter font family
+
+**Score Levels**:
+
+- 🟢 Giỏi (≥8): Green `#10b981`
+- 🔵 Khá (6-8): Blue `#3b82f6`
+- 🟡 Trung bình (4-6): Yellow `#eab308`
+- 🔴 Yếu (<4): Red `#ef4444`
+
+## 📦 Project Highlights
+
+### Backend
+
+- ✅ RESTful API với NestJS
+- ✅ Prisma ORM với optimized queries
+- ✅ Composite indexes cho performance
+- ✅ CSV seeding
+- ✅ Swagger documentation
+- ✅ DTO validation với class-validator
+- ✅ Global exception filters
+
+### Frontend
+
+- ✅ Redux Toolkit Query (RTK Query) cho API calls
+- ✅ TypeScript strict mode
+- ✅ Tailwind CSS v4 với @tailwindcss/postcss
+- ✅ ECharts data visualization
+- ✅ Responsive design (mobile-first)
+- ✅ Loading states & error handling
+- ✅ Optimized bundle với Vite
+
+## 🔧 Development Scripts
+
+### Backend
+
+```bash
+npm run start:dev    # Development with watch mode
+npm run build        # Build for production
+npm run seed         # Seed database from CSV
+npx prisma studio    # Database GUI
+```
+
+### Frontend
+
+```bash
+npm run dev          # Development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # ESLint check
+```
