@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Rubik", sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+.gradient-sidebar {
+  background: linear-gradient(180deg, #ffd700 0%, #7cb342 50%, #0097a7 100%);
+}
