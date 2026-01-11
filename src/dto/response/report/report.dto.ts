@@ -53,3 +53,62 @@ export class SubjectScoreLevelStatsDto {
   })
   levels: ScoreLevelStatsDto[];
 }
+export class SubjectScoreDetailDto {
+  @ApiProperty({
+    example: 'toan',
+    description: 'Mã môn học',
+  })
+  subjectCode: string;
+
+  @ApiProperty({
+    example: 'Toán',
+    description: 'Tên môn học',
+  })
+  subjectName: string;
+
+  @ApiProperty({
+    example: 9.5,
+    description: 'Điểm số',
+  })
+  score: number;
+}
+
+export class Top10GroupAStudentDto {
+  @ApiProperty({
+    example: 1,
+    description: 'Thứ hạng',
+  })
+  rank: number;
+
+  @ApiProperty({
+    example: '01001234',
+    description: 'Số báo danh',
+  })
+  registrationNumber: string;
+
+  @ApiProperty({
+    example: 27.5,
+    description: 'Tổng điểm khối A (Toán + Lý + Hóa)',
+  })
+  totalScore: number;
+
+  @ApiProperty({
+    type: [SubjectScoreDetailDto],
+    description: 'Chi tiết điểm từng môn',
+  })
+  scores: SubjectScoreDetailDto[];
+}
+
+export class Top10GroupADto {
+  @ApiProperty({
+    type: [Top10GroupAStudentDto],
+    description: 'Danh sách top 10 học sinh điểm cao nhất khối A',
+  })
+  students: Top10GroupAStudentDto[];
+
+  @ApiProperty({
+    example: 10,
+    description: 'Tổng số học sinh trong danh sách',
+  })
+  total: number;
+}

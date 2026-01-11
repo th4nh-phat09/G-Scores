@@ -2,7 +2,10 @@ import { Controller, Get, HttpStatus, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BaseResponseDto } from 'src/dto/base.dto';
 import { GetScoreLevelStatsQueryDto } from 'src/dto/request/report/report.dto';
-import { SubjectScoreLevelStatsDto } from 'src/dto/response/report/report.dto';
+import {
+  SubjectScoreLevelStatsDto,
+  Top10GroupADto,
+} from 'src/dto/response/report/report.dto';
 import { ReportService } from 'src/services/report/report.service';
 
 @ApiTags('Reports')
@@ -35,5 +38,26 @@ export class ReportController {
       data,
       `Lấy thống kê môn ${data.subjectName} thành công`,
     );
+  }
+
+  @Get('/top-10-group-a')
+  @ApiOperation({
+    summary: 'Lấy top 10 học sinh có tổng điểm khối A cao nhất',
+    description:
+      'Top 10 học sinh có tổng điểm cao nhất trong khối A (Toán + Lý + Hóa). ' +
+      'Chỉ tính học sinh có đủ điểm cả 3 môn.',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Lấy danh sách thành công',
+    type: Top10GroupADto,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Không tìm đủ 3 môn Toán, Lý, Hóa trong hệ thống',
+  })
+  async getTop10GroupA(): Promise<BaseResponseDto<Top10GroupADto>> {
+    const data = await this.reportService.getTop10GroupA();
+    return BaseResponseDto.success(data, 'Lấy top 10 khối A thành công');
   }
 }

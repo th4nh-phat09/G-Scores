@@ -54,4 +54,5 @@ model Score {
   @@unique([studentId, subjectId])
   @@index([studentId])
   @@index([subjectId, value])
+  @@index([subjectId, studentId, value])
 }
